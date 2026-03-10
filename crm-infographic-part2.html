@@ -1,0 +1,196 @@
+<div id="crm-root-2" style="background:#FFFFFF;padding:40px 24px;font-family:'DM Sans','Helvetica Neue',sans-serif;color:#1F1F1F;position:relative;overflow:hidden;">
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+<style>
+  #crm-root-2 *, #crm-root-2 *::before, #crm-root-2 *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ── Grain texture overlay ── */
+  #crm-root-2::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.032;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 180px 180px;
+    z-index: 1;
+  }
+
+  /* ── Fade-in-rise ── */
+  @keyframes fadeInRise2 {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  #crm-root-2 .crm-anim {
+    opacity: 0;
+    animation: fadeInRise2 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  /* ── Deal cascade ── */
+  #crm-root-2 .deal-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: #FFFFFF;
+    border: 1px solid rgba(31,31,31,0.08);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+  }
+  #crm-root-2 .deal-pill.lit {
+    background: rgba(225,122,20,0.06);
+    border-color: rgba(225,122,20,0.35);
+    transform: scale(1.02);
+  }
+  #crm-root-2 .deal-pill .dp-icon { width: 18px; height: 18px; flex-shrink: 0; display: flex; align-items: center; }
+  #crm-root-2 .deal-pill .dp-icon svg { width: 18px; height: 18px; }
+  #crm-root-2 .deal-pill .dp-name {
+    color: #1F1F1F;
+    font-size: 11px;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+  #crm-root-2 .deal-pill.lit .dp-name { color: #E17A14; }
+  #crm-root-2 .deal-pill .dp-desc { color: #999999; font-size: 10px; line-height: 1.2; }
+
+  /* ── Section label ── */
+  #crm-root-2 .crm-section-label { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  #crm-root-2 .crm-section-num {
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #FFFFFF; font-size: 14px; font-weight: 700; flex-shrink: 0;
+  }
+  #crm-root-2 .crm-section-text {
+    color: #1F1F1F; font-size: 15px; font-weight: 700;
+    letter-spacing: 0.03em; text-transform: uppercase;
+  }
+</style>
+
+<!-- Subtle background dots -->
+<div style="position:absolute;inset:0;background-image:radial-gradient(rgba(31,31,31,0.06) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;"></div>
+
+<!-- Glow accents -->
+<div style="position:absolute;top:-200px;right:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(225,122,20,0.04),transparent 70%);pointer-events:none;"></div>
+<div style="position:absolute;bottom:-150px;left:-150px;width:400px;height:400px;background:radial-gradient(circle,rgba(156,225,252,0.04),transparent 70%);pointer-events:none;"></div>
+
+<div style="max-width:720px;margin:0 auto;position:relative;z-index:2;">
+
+  <!-- ═══ COMPACT HEADER ═══ -->
+  <div class="crm-anim" style="animation-delay:0ms;text-align:center;margin-bottom:36px;">
+    <div style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#1479E1;font-weight:700;margin-bottom:10px;">
+      work.flowers · CRM Architecture
+    </div>
+    <h2 style="font-size:24px;font-weight:800;line-height:1.2;margin:0;font-family:'DM Serif Display',Georgia,serif;background:linear-gradient(135deg,#2E1B88,#4E1B61);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+      From Deal Won to Fully Operational
+    </h2>
+  </div>
+
+  <!-- ═══ STEP 1: DEAL WON CASCADE ═══ -->
+  <div class="crm-anim" style="animation-delay:150ms;">
+    <div class="crm-section-label">
+      <div class="crm-section-num" style="background:#E17A14;">1</div>
+      <div class="crm-section-text">Deal won? Everything spins up</div>
+    </div>
+
+    <!-- Deal Won header -->
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+      <span style="font-size:12px;font-weight:700;color:#E17A14;letter-spacing:0.04em;">🎉 DEAL WON</span>
+      <div style="flex:1;height:1px;background:linear-gradient(to right,rgba(225,122,20,0.3),transparent);"></div>
+      <span style="font-size:11px;color:#999999;">5 things happen automatically</span>
+    </div>
+
+    <!-- Deal Won grid -->
+    <div id="deal-grid-2" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;">
+      <!-- Google Drive -->
+      <div class="deal-pill" data-idx="0">
+        <span class="dp-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M8 4l4.5 8H21l-4.5-8H8z" fill="#FBBC04"/><path d="M3 20l4.5-8H16l-4.5 8H3z" fill="#4285F4"/><path d="M8 4L3 12.5l4.5 7.5h8.5L12 12H3.5" fill="#34A853" opacity=".9"/><path d="M8 4l4 8h9" stroke="none" fill="#EA4335" opacity=".15"/></svg></span>
+        <div><div class="dp-name">Google Drive</div><div class="dp-desc">Folder structure</div></div>
+      </div>
+      <!-- Linear -->
+      <div class="deal-pill" data-idx="1">
+        <span class="dp-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3.68 12.49l7.83 7.83a9.53 9.53 0 01-7.83-7.83z" fill="#5E6AD2"/><path d="M3.01 10.64l10.35 10.35a9.56 9.56 0 003.86-1.78L4.79 6.78a9.56 9.56 0 00-1.78 3.86z" fill="#5E6AD2"/><path d="M5.97 5.57L18.43 18.03a9.53 9.53 0 002.06-2.77L8.74 3.51a9.53 9.53 0 00-2.77 2.06z" fill="#5E6AD2"/><path d="M10.22 3.15l10.63 10.63A9.55 9.55 0 0021.56 12 9.56 9.56 0 0012 2.44c-.6 0-1.2.06-1.78.18l0 .53z" fill="#5E6AD2"/></svg></span>
+        <div><div class="dp-name">Linear</div><div class="dp-desc">Project &amp; team</div></div>
+      </div>
+      <!-- Slack -->
+      <div class="deal-pill" data-idx="2">
+        <span class="dp-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M6.5 14.5a1.5 1.5 0 110-3h3.5v3a1.5 1.5 0 01-3 0h-.5z" fill="#E01E5A"/><path d="M10 6.5a1.5 1.5 0 113 0V10H10a1.5 1.5 0 010-3v-.5z" fill="#36C5F0"/><path d="M17.5 10a1.5 1.5 0 110 3H14v-3.5a1.5 1.5 0 013 0v.5z" fill="#2EB67D"/><path d="M14 17.5a1.5 1.5 0 11-3 0V14h3.5a1.5 1.5 0 010 3H14z" fill="#ECB22E"/></svg></span>
+        <div><div class="dp-name">Slack</div><div class="dp-desc">Client channel</div></div>
+      </div>
+      <!-- Harvest -->
+      <div class="deal-pill" data-idx="3">
+        <span class="dp-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="4.5" fill="#FA5D00"/><g fill="#FFFFFF"><rect x="5.5" y="6" width="2" height="12" rx=".8"/><rect x="8.5" y="8" width="2" height="10" rx=".8"/><rect x="11" y="10" width="2" height="8" rx=".8"/><rect x="13.5" y="6" width="2" height="12" rx=".8"/><rect x="16.5" y="8" width="2" height="10" rx=".8"/></g></svg></span>
+        <div><div class="dp-name">Harvest</div><div class="dp-desc">Time tracking</div></div>
+      </div>
+      <!-- MailerLite -->
+      <div class="deal-pill" data-idx="4">
+        <span class="dp-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="4.5" fill="#FFFFFF" stroke="#E8E8E8" stroke-width=".5"/><path d="M4.5 7.5a2 2 0 012-2h11a2 2 0 012 2v6.5a2 2 0 01-2 2H11l-3.5 2.5v-2.5H6.5a2 2 0 01-2-2V7.5z" fill="#09C269"/><text x="12" y="13" text-anchor="middle" font-family="DM Sans,sans-serif" font-weight="800" font-size="6.5" fill="#FFFFFF">ML</text></svg></span>
+        <div><div class="dp-name">MailerLite</div><div class="dp-desc">Mailing list</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 2: AI COMPOUNDS ═══ -->
+  <div class="crm-anim" style="animation-delay:300ms;margin-top:32px;">
+    <div class="crm-section-label">
+      <div class="crm-section-num" style="background:#9CE1FC;color:#2E1B88;">✨</div>
+      <div class="crm-section-text">The more you use it, the smarter it gets</div>
+    </div>
+    <div style="background:linear-gradient(135deg,rgba(156,225,252,0.08),rgba(46,27,136,0.04));border:1.5px solid rgba(156,225,252,0.25);border-radius:16px;padding:22px 24px;">
+      <p style="font-size:13px;color:#444444;line-height:1.7;margin:0;">
+        Contacts, emails, meeting notes, deals, and invoices all live in the same workspace. That means Notion AI can answer questions like <em>"what's the latest with this customer?"</em> by drawing on meeting transcripts, email threads, and deal status — with citations back to the source.
+      </p>
+      <p style="font-size:13px;color:#444444;line-height:1.7;margin:10px 0 0 0;">
+        Every email logged and meeting note linked makes the AI more accurate over time. The system compounds.
+      </p>
+    </div>
+  </div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <div class="crm-anim" style="animation-delay:450ms;text-align:center;margin-top:48px;padding:24px 0;border-top:1px solid rgba(31,31,31,0.08);">
+    <div style="font-size:11px;color:#999999;letter-spacing:0.04em;line-height:1.7;">
+      No seat-based pricing traps · No six-week onboarding · Just the system you need
+    </div>
+    <div style="display:inline-flex;align-items:center;gap:8px;margin-top:14px;">
+      <!-- work.flowers official logo mark -->
+      <svg viewBox="3 3 85 85" width="28" height="28">
+        <path d="M86.7038,59.1642L81.8308,47.399c-0.4658-1.1247-0.4658-2.9651,0-4.0898l4.8734-11.7655c0.916-2.2114-0.1341-4.7467-2.3456-5.6627L72.593,21.0074c-1.1248-0.4659-2.4262-1.7674-2.8921-2.8922L64.8892,6.498c-0.3846-0.9285-1.0297-1.7501-1.9045-2.2448c-1.1962-0.6764-2.5833-0.7624-3.8199-0.2488L47.3992,8.878c-0.5352,0.2217-1.29,0.3325-2.0449,0.3325s-1.5098-0.1108-2.0449-0.3325L31.5437,4.0045C30.307,3.4909,28.92,3.5769,27.7237,4.2533c-0.8748,0.4946-1.5199,1.3163-1.9045,2.2448l-4.8117,11.6172c-0.4659,1.1248-1.7673,2.4263-2.8921,2.8922L6.3498,25.881c-2.2114,0.916-3.2616,3.4513-2.3456,5.6627l4.8734,11.7655c0.4659,1.1247,0.4659,2.9651,0,4.0898L4.0718,59.0019c-0.3863,0.9326-0.5144,1.9742-0.2463,2.9474c0.3656,1.3268,1.2869,2.366,2.5248,2.8785l11.7646,4.8735c1.1251,0.4661,2.427,1.768,2.893,2.8931l4.8154,11.6257c0.3844,0.928,1.0314,1.7476,1.9071,2.2398c1.1962,0.6723,2.5792,0.7568,3.8132,0.2443l11.7656-4.8735c0.5352-0.2217,1.29-0.3325,2.0449-0.3325s1.5098,0.1108,2.0449,0.3325l11.7656,4.8735c1.234,0.5125,2.617,0.428,3.8132-0.2443c0.8756-0.4922,1.5227-1.3118,1.9071-2.2398l4.8159-11.6267c0.4658-1.1246,1.767-2.4258,2.8916-2.8917l11.6055-4.8076c0.9325-0.3863,1.7591-1.0328,2.257-1.9108C87.1337,61.7865,87.2166,60.4009,86.7038,59.1642z" fill="#1D3799"/>
+        <path d="M79.0593,42.1612c-0.0828,0.1997-0.1555,0.411-0.2189,0.6311c-0.1785,0.6198-0.7235,1.0622-1.3685,1.0622l-13.1464,0c-0.5971,0-1.1789-0.1885-1.6625-0.5387l-4.3571-3.155c-0.6528-0.4727-0.7805-1.3938-0.2811-2.0263l0.4165-0.5275c0.4026-0.5099,0.9682-0.866,1.6021-1.0087l22.4458-5.0537c0.4483-0.1009,0.8242,0.3455,0.6484,0.77L79.0593,42.1612z" fill="#62D4F9"/>
+        <path d="M71.4451,23.7789l9.5739,3.9657c0.5112,0.2117,0.4473,0.9553-0.0924,1.0769l-17.3484,3.9057c-0.5211,0.1173-0.9005-0.4852-0.5694-0.9044l6.2042-7.8564c0.417-0.5281,1.1558-0.7252,1.752-0.4131C71.1252,23.6372,71.2855,23.7128,71.4451,23.7789z" fill="#62D4F9"/>
+        <path d="M66.9294,19.2638c0.1072,0.2587,0.2402,0.5191,0.3935,0.7781c0.2989,0.5051,0.2646,1.1413-0.0991,1.602l-4.7616,6.0302c-0.7068,0.895-2.144,0.304-2.0166-0.8293l1.8085-16.0902c0.0654-0.5821,0.863-0.6948,1.0872-0.1536L66.9294,19.2638z" fill="#62D4F9"/>
+        <path d="M48.5476,11.6495l8.8848-3.6805c0.997-0.413,2.0714,0.3953,1.9509,1.4678l-2.8402,25.2646c-0.0401,0.3569-0.1793,0.6954-0.4019,0.9773c-0.5753,0.7286-1.6841,0.7166-2.2435-0.0243l-3.4187-4.5281c-0.5733-0.7593-0.9463-1.6507-1.0845-2.5921l-2.4167-16.4529C47.5412,11.9872,48.0759,11.8448,48.5476,11.6495z" fill="#9BE0FD"/>
+        <path d="M43.9494,12.1092l1.4079,9.5835c0.128,0.871-0.9896,1.3386-1.5201,0.636L36.007,11.9569c-0.8702-1.1526,0.3393-2.7161,1.6736-2.1634l4.4803,1.856C42.6926,11.8697,43.3064,12.0177,43.9494,12.1092z" fill="#9BE0FD"/>
+        <path d="M26.8378,11.879c0.8388-2.0252,3.5605-2.3727,4.8812-0.6232l10.0604,13.3257c0.6744,0.8933-0.216,2.1198-1.2743,1.7552l-17.3266-5.9699c0.2383-0.366,0.4487-0.7363,0.6006-1.103L26.8378,11.879z" fill="#9BE0FD"/>
+        <path d="M6.7761,30.3961c-0.2821-0.6811,0.0413-1.4618,0.7224-1.7439l11.7649-4.8732c0.2293-0.0949,0.4599-0.2102,0.6898-0.3421c0.7016-0.4024,1.546-0.476,2.3107-0.2125l23.3562,8.0474c1.0661,0.3673,1.9984,1.0442,2.6778,1.9441l1.0434,1.382c1.3095,1.7344,0.2604,4.2366-1.8944,4.5187l-33.5016,4.3849c-0.9756,0.1277-1.9152-0.4163-2.2902-1.3259l-0.0059-0.0143L6.7761,30.3961z" fill="#017AE3"/>
+        <path d="M11.6492,48.547c0.0215-0.0517,0.0422-0.1043,0.0623-0.1576c0.3767-0.9986,1.2417-1.7326,2.2999-1.8711l31.6103-4.1374c1.3853-0.1813,2.1696,1.5392,1.1241,2.4659l-6.6023,5.8526c-0.3255,0.2886-0.7131,0.4983-1.1327,0.613L9.6531,59.34c-1.1367,0.3108-2.1342-0.8207-1.6833-1.9095L11.6492,48.547z" fill="#017AE3"/>
+        <path d="M19.2634,66.9298l-6.5106-2.6968c-1.2477-0.5168-1.1342-2.3204,0.1685-2.6766l15.7928-4.3185c1.4466-0.3956,2.4362,1.433,1.314,2.4277l-8.41,7.4547c-0.4603,0.408-1.1269,0.4597-1.6605,0.1537C19.7262,67.1415,19.494,67.0254,19.2634,66.9298z" fill="#017AE3"/>
+        <path d="M23.779,71.4449c-0.069-0.1664-0.1485-0.3336-0.2371-0.5008c-0.3159-0.5961-0.2196-1.3248,0.2852-1.7723l9.905-8.78c0.8767-0.7771,2.2124,0.1236,1.8207,1.2276l-6.0765,17.1261c-0.4342,1.2236-2.1483,1.268-2.6452,0.0684L23.779,71.4449z" fill="#017AE3"/>
+        <path d="M42.1609,79.0592l-8.3255,3.4489c-1.1342,0.4698-2.2887-0.6263-1.8782-1.7833l9.4652-26.678c0.1603-0.4517,0.4325-0.8555,0.7912-1.1734l6.841-6.0639c1.0388-0.9208,2.6449,0.046,2.3175,1.3949l-6.9652,28.6976c-0.2264,0.9327-0.9059,1.7069-1.8194,2.0013C42.4404,78.9505,42.2979,79.0025,42.1609,79.0592z" fill="#1099E7"/>
+        <path d="M81.365,56.8581l-11.6894-8.4643c-0.6678-0.4836-0.3257-1.5392,0.4987-1.5392h7.2979c0.6448,0,1.1898,0.4422,1.3684,1.0618c0.0634,0.2199,0.1361,0.4311,0.2186,0.6305l3.162,7.635C82.4401,56.7102,81.8281,57.1934,81.365,56.8581z" fill="#1099E7"/>
+        <path d="M62.0564,83.2101c-0.1353,0.3267-0.3926,0.582-0.7236,0.7192s-0.6934,0.1387-1.0205,0.0034l-11.7646-4.8735l-0.0134-0.0055c-0.8169-0.3369-1.266-1.2193-1.0576-2.078l7.4577-30.727c0.4753-1.9583,2.7848-2.8093,4.4171-1.6274l1.853,1.3417c0.2631,0.1905,0.4528,0.4656,0.5373,0.7793l6.2014,23.0171c-0.4229,0.5486-0.7798,1.1213-1.0137,1.6855L62.0564,83.2101z" fill="#1099E7"/>
+        <path d="M70.0037,65.8753l-3.9082-14.5047c-0.2085-0.7737,0.6709-1.3799,1.3199-0.91l15.113,10.9432c0.3592,0.2601,0.2942,0.8133-0.1155,0.983c0,0-7.2677,3.0418-10.4848,4.4235C71.135,67.1508,70.2282,66.7086,70.0037,65.8753z" fill="#1099E7"/>
+      </svg>
+      <span style="font-size:14px;font-weight:600;color:#1F1F1F;letter-spacing:-0.01em;">work.flowers</span>
+    </div>
+  </div>
+
+</div><!-- /max-width wrapper -->
+
+<!-- ═══ Deal Won Cascade Animation ═══ -->
+<script>
+(function() {
+  var active = -1;
+  var total = 5;
+  var pills = document.querySelectorAll('#deal-grid-2 .deal-pill');
+  setInterval(function() {
+    active = active >= total - 1 ? -1 : active + 1;
+    for (var i = 0; i < pills.length; i++) {
+      if (i <= active) { pills[i].classList.add('lit'); }
+      else { pills[i].classList.remove('lit'); }
+    }
+  }, 600);
+})();
+</script>
+
+</div><!-- /crm-root-2 -->
