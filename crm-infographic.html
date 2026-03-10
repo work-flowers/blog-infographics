@@ -1,12 +1,24 @@
-<div id="crm-root" style="background:#0F0E17;padding:40px 24px;font-family:'DM Sans','Helvetica Neue',sans-serif;color:#FFFFFF;position:relative;overflow:hidden;">
+<div id="crm-root" style="background:#FFFFFF;padding:40px 24px;font-family:'DM Sans','Helvetica Neue',sans-serif;color:#1F1F1F;position:relative;overflow:hidden;">
 
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
 
 <style>
-  /* ── Reset scope ── */
   #crm-root *, #crm-root *::before, #crm-root *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  /* ── Fade-in-rise animation ── */
+  /* ── Grain texture overlay ── */
+  #crm-root::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.032;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 180px 180px;
+    z-index: 1;
+  }
+
+  /* ── Fade-in-rise ── */
   @keyframes fadeInRise {
     from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -16,33 +28,32 @@
     animation: fadeInRise 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
 
-  /* ── Pill hover ── */
+  /* ── Pill base ── */
   .crm-pill {
     display: flex;
     align-items: center;
     gap: 10px;
     padding: 10px 16px;
-    background: #1A1930;
-    border: 1px solid #5C5A7244;
+    background: #FFFFFF;
+    border: 1px solid rgba(31,31,31,0.10);
     border-radius: 12px;
     cursor: default;
     transition: all 0.25s ease;
   }
   .crm-pill:hover {
-    background: #232145;
+    background: #FAFCFF;
     transform: scale(1.03);
   }
-  .crm-pill.c-azure:hover  { border-color: rgba(20,121,225,0.27); box-shadow: 0 4px 20px rgba(20,121,225,0.13); }
-  .crm-pill.c-ochre:hover  { border-color: rgba(225,122,20,0.27); box-shadow: 0 4px 20px rgba(225,122,20,0.13); }
-  .crm-pill.c-white:hover  { border-color: rgba(255,255,255,0.27); box-shadow: 0 4px 20px rgba(255,255,255,0.13); }
-  .crm-pill.small {
-    gap: 8px;
-    padding: 6px 12px;
-  }
-  .crm-pill .pill-icon { font-size: 22px; flex-shrink: 0; }
-  .crm-pill.small .pill-icon { font-size: 18px; }
+  .crm-pill.c-azure:hover  { border-color: rgba(20,121,225,0.4); box-shadow: 0 4px 16px rgba(20,121,225,0.10); }
+  .crm-pill.c-ochre:hover  { border-color: rgba(225,122,20,0.4); box-shadow: 0 4px 16px rgba(225,122,20,0.10); }
+  .crm-pill.c-white:hover  { border-color: rgba(46,27,136,0.3); box-shadow: 0 4px 16px rgba(46,27,136,0.08); }
+  .crm-pill.small { gap: 8px; padding: 6px 12px; }
+  .crm-pill .pill-icon { width: 22px; height: 22px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .crm-pill .pill-icon svg { width: 20px; height: 20px; }
+  .crm-pill.small .pill-icon { width: 18px; height: 18px; }
+  .crm-pill.small .pill-icon svg { width: 16px; height: 16px; }
   .crm-pill .pill-name {
-    color: #FFFFFF;
+    color: #1F1F1F;
     font-size: 13px;
     font-weight: 600;
     letter-spacing: 0.01em;
@@ -50,7 +61,7 @@
   }
   .crm-pill.small .pill-name { font-size: 12px; }
   .crm-pill .pill-desc {
-    color: #8B8AA0;
+    color: #777777;
     font-size: 11px;
     line-height: 1.3;
     margin-top: 2px;
@@ -59,106 +70,82 @@
     text-overflow: ellipsis;
   }
 
-  /* ── Deal cascade pill ── */
+  /* ── Deal cascade ── */
   .deal-pill {
     display: flex;
     align-items: center;
     gap: 8px;
     padding: 8px 12px;
-    background: #1A1930;
-    border: 1px solid #5C5A7233;
+    background: #FFFFFF;
+    border: 1px solid rgba(31,31,31,0.08);
     border-radius: 10px;
     transition: all 0.3s ease;
   }
   .deal-pill.lit {
-    background: #E17A1418;
-    border-color: #E17A1466;
+    background: rgba(225,122,20,0.06);
+    border-color: rgba(225,122,20,0.35);
     transform: scale(1.02);
   }
-  .deal-pill .dp-icon { font-size: 16px; }
+  .deal-pill .dp-icon { width: 18px; height: 18px; flex-shrink: 0; display: flex; align-items: center; }
+  .deal-pill .dp-icon svg { width: 18px; height: 18px; }
   .deal-pill .dp-name {
-    color: #FFFFFF;
+    color: #1F1F1F;
     font-size: 11px;
     font-weight: 600;
     transition: color 0.3s ease;
   }
-  .deal-pill.lit .dp-name { color: #F6C696; }
-  .deal-pill .dp-desc {
-    color: #8B8AA0;
-    font-size: 10px;
-    line-height: 1.2;
-  }
+  .deal-pill.lit .dp-name { color: #E17A14; }
+  .deal-pill .dp-desc { color: #999999; font-size: 10px; line-height: 1.2; }
 
   /* ── Section label ── */
-  .crm-section-label {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
+  .crm-section-label { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
   .crm-section-num {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #FFFFFF;
-    font-size: 14px;
-    font-weight: 700;
-    flex-shrink: 0;
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #FFFFFF; font-size: 14px; font-weight: 700; flex-shrink: 0;
   }
   .crm-section-text {
-    color: #FFFFFF;
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
+    color: #1F1F1F; font-size: 15px; font-weight: 700;
+    letter-spacing: 0.03em; text-transform: uppercase;
   }
 
   /* ── Stat badge ── */
   .crm-stat-number {
-    font-size: 28px;
-    font-weight: 800;
-    line-height: 1;
+    font-size: 28px; font-weight: 800; line-height: 1;
     font-family: 'DM Serif Display', Georgia, serif;
   }
   .crm-stat-label {
-    font-size: 10px;
-    color: #8B8AA0;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin-top: 4px;
-    font-weight: 600;
+    font-size: 10px; color: #999999; letter-spacing: 0.06em;
+    text-transform: uppercase; margin-top: 4px; font-weight: 600;
   }
 </style>
 
-<!-- Background grid -->
-<div style="position:absolute;inset:0;background-image:radial-gradient(#5C5A7215 1px,transparent 1px);background-size:32px 32px;pointer-events:none;"></div>
+<!-- Subtle background dots -->
+<div style="position:absolute;inset:0;background-image:radial-gradient(rgba(31,31,31,0.06) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;"></div>
 
-<!-- Glow accents -->
-<div style="position:absolute;top:-200px;right:-200px;width:500px;height:500px;background:radial-gradient(circle,#2E1B8818,transparent 70%);pointer-events:none;"></div>
-<div style="position:absolute;bottom:-150px;left:-150px;width:400px;height:400px;background:radial-gradient(circle,#E17A1410,transparent 70%);pointer-events:none;"></div>
+<!-- Glow accents (very subtle on white) -->
+<div style="position:absolute;top:-200px;right:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(46,27,136,0.04),transparent 70%);pointer-events:none;"></div>
+<div style="position:absolute;bottom:-150px;left:-150px;width:400px;height:400px;background:radial-gradient(circle,rgba(225,122,20,0.03),transparent 70%);pointer-events:none;"></div>
 
-<div style="max-width:720px;margin:0 auto;position:relative;">
+<div style="max-width:720px;margin:0 auto;position:relative;z-index:2;">
 
   <!-- ═══ HEADER ═══ -->
   <div class="crm-anim" style="animation-delay:0ms;text-align:center;margin-bottom:40px;">
     <div style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#1479E1;font-weight:700;margin-bottom:12px;">
       work.flowers · CRM Architecture
     </div>
-    <h1 style="font-size:32px;font-weight:800;line-height:1.15;margin:0;font-family:'DM Serif Display',Georgia,serif;background:linear-gradient(135deg,#FFFFFF,#9CE1FC);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+    <h1 style="font-size:32px;font-weight:800;line-height:1.15;margin:0;font-family:'DM Serif Display',Georgia,serif;background:linear-gradient(135deg,#2E1B88,#4E1B61);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
       A CRM That Runs Itself
     </h1>
-    <p style="color:#8B8AA0;font-size:14px;margin-top:12px;line-height:1.6;max-width:480px;margin-left:auto;margin-right:auto;">
+    <p style="color:#777777;font-size:14px;margin-top:12px;line-height:1.6;max-width:480px;margin-left:auto;margin-right:auto;">
       7 databases. 30+ automations. Zero manual data entry.<br>
       Here's how it all connects.
     </p>
 
     <!-- Stats row -->
-    <div style="display:flex;justify-content:center;gap:40px;margin-top:24px;padding:16px 0;border-top:1px solid #5C5A7233;border-bottom:1px solid #5C5A7233;">
+    <div style="display:flex;justify-content:center;gap:40px;margin-top:24px;padding:16px 0;border-top:1px solid rgba(31,31,31,0.08);border-bottom:1px solid rgba(31,31,31,0.08);">
       <div style="text-align:center;">
-        <div class="crm-stat-number" style="color:#FFFFFF;">7</div>
+        <div class="crm-stat-number" style="color:#2E1B88;">7</div>
         <div class="crm-stat-label">Databases</div>
       </div>
       <div style="text-align:center;">
@@ -170,7 +157,7 @@
         <div class="crm-stat-label">Integrations</div>
       </div>
       <div style="text-align:center;">
-        <div class="crm-stat-number" style="color:#9CE1FC;">0</div>
+        <div class="crm-stat-number" style="color:#4E1B61;">0</div>
         <div class="crm-stat-label">Manual Entry</div>
       </div>
     </div>
@@ -183,38 +170,44 @@
       <div class="crm-section-text">Data flows in from your existing tools</div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-bottom:8px;">
+      <!-- Gmail -->
       <div class="crm-pill c-azure">
-        <span class="pill-icon">📧</span>
+        <span class="pill-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M2 6.5V18a1 1 0 001 1h18a1 1 0 001-1V6.5" stroke="#EA4335" stroke-width="0"/><rect x="2" y="5" width="20" height="14" rx="1.5" fill="#F1F3F4" stroke="#E0E0E0" stroke-width=".5"/><path d="M2.5 5.5L12 13l9.5-7.5" stroke="#EA4335" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M2.5 19l6.5-6" stroke="#34A853" stroke-width="1.5" stroke-linecap="round" fill="none"/><path d="M21.5 19l-6.5-6" stroke="#4285F4" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></span>
         <div><div class="pill-name">Gmail</div><div class="pill-desc">cc crm@ on any thread</div></div>
       </div>
+      <!-- Google Calendar -->
       <div class="crm-pill c-azure">
-        <span class="pill-icon">📅</span>
+        <span class="pill-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" fill="#FFFFFF" stroke="#4285F4" stroke-width="1.5"/><rect x="3" y="4" width="18" height="5" rx="2" fill="#4285F4"/><path d="M7 2.5V5.5M17 2.5V5.5" stroke="#4285F4" stroke-width="1.5" stroke-linecap="round"/><text x="12" y="18" text-anchor="middle" font-family="DM Sans,sans-serif" font-weight="700" font-size="8" fill="#4285F4">31</text></svg></span>
         <div><div class="pill-name">Google Calendar</div><div class="pill-desc">Meetings auto-captured</div></div>
       </div>
+      <!-- Granola -->
       <div class="crm-pill c-azure">
-        <span class="pill-icon">🎙️</span>
+        <span class="pill-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" fill="#97A63B"/><path d="M17.5 11.5C17.5 15 15 17.5 12 17.5C8.5 17.5 6.5 15 6.5 12C6.5 8.5 9 6.5 12 6.5C14 6.5 15.5 7.5 16 9" stroke="#1F1F1F" stroke-width="2.3" stroke-linecap="round" fill="none"/><path d="M16 9C15.5 10.5 14 12 12.5 12.5C11 13 10 12 10.5 11C11 10 12 9.5 13 10C13.5 10.3 13.2 11 12.5 11.2" stroke="#1F1F1F" stroke-width="2" stroke-linecap="round" fill="none"/></svg></span>
         <div><div class="pill-name">Granola</div><div class="pill-desc">In-person transcriptions</div></div>
       </div>
+      <!-- MailerLite -->
       <div class="crm-pill c-azure">
-        <span class="pill-icon">📬</span>
+        <span class="pill-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="4.5" fill="#FFFFFF" stroke="#E8E8E8" stroke-width=".5"/><path d="M4.5 7.5a2 2 0 012-2h11a2 2 0 012 2v6.5a2 2 0 01-2 2H11l-3.5 2.5v-2.5H6.5a2 2 0 01-2-2V7.5z" fill="#09C269"/><text x="12" y="13" text-anchor="middle" font-family="DM Sans,sans-serif" font-weight="800" font-size="6.5" fill="#FFFFFF">ML</text></svg></span>
         <div><div class="pill-name">MailerLite</div><div class="pill-desc">Mailing list activity</div></div>
       </div>
+      <!-- Website -->
       <div class="crm-pill c-azure">
-        <span class="pill-icon">🌐</span>
+        <span class="pill-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9.5" stroke="#1479E1" stroke-width="1.5"/><ellipse cx="12" cy="12" rx="4" ry="9.5" stroke="#1479E1" stroke-width="1.2"/><path d="M3 12h18M4.5 7.5h15M4.5 16.5h15" stroke="#1479E1" stroke-width="1" opacity=".5"/></svg></span>
         <div><div class="pill-name">Website</div><div class="pill-desc">Inbound enquiries</div></div>
       </div>
     </div>
   </div>
 
-  <!-- ═══ ARROW: Sources → Notion ═══ -->
+  <!-- ═══ ARROW: Sources → Enrichment ═══ -->
   <div class="crm-anim" style="animation-delay:400ms;display:flex;flex-direction:column;align-items:center;padding:12px 0;">
-    <div style="width:2px;height:32px;background:linear-gradient(to bottom,#1479E144,#1479E1);"></div>
+    <div style="width:2px;height:32px;background:linear-gradient(to bottom,rgba(20,121,225,0.15),#1479E1);border-radius:1px;"></div>
     <!-- Automation badge -->
-    <div style="display:inline-flex;align-items:center;gap:6px;padding:4px 12px;background:#2E1B8866;border:1px solid #2E1B88;border-radius:20px;color:#9CE1FC;font-size:11px;font-weight:600;letter-spacing:0.04em;">
-      <span style="font-size:13px;">⚡</span> 30+ Zapier Automations
+    <div style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;background:rgba(156,225,252,0.15);border:1px solid rgba(20,121,225,0.2);border-radius:20px;color:#1479E1;font-size:11px;font-weight:600;letter-spacing:0.04em;">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none"><path d="M13 2L4.5 13H12l-1 9 8.5-11H12l1-9z" fill="#E17A14"/></svg>
+      30+ Zapier Automations
     </div>
-    <div style="width:2px;height:20px;background:linear-gradient(to bottom,#1479E1,#1479E144);"></div>
-    <div style="width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:8px solid #1479E188;"></div>
+    <div style="width:2px;height:20px;background:linear-gradient(to bottom,#1479E1,rgba(20,121,225,0.15));border-radius:1px;"></div>
+    <div style="width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:8px solid rgba(20,121,225,0.45);"></div>
   </div>
 
   <!-- ═══ STEP 2: ENRICHMENT ═══ -->
@@ -224,12 +217,14 @@
       <div class="crm-section-text">AI enriches every record</div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+      <!-- Apollo.io -->
       <div class="crm-pill c-ochre">
-        <span class="pill-icon">🔍</span>
+        <span class="pill-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="4.5" fill="#FFE500"/><path d="M12 5v4M12 15v4M5 12h4M15 12h4" stroke="#1F1F1F" stroke-width="2.6" stroke-linecap="round"/><path d="M7.4 7.4l2.8 2.8M13.8 13.8l2.8 2.8M16.6 7.4l-2.8 2.8M10.2 13.8l-2.8 2.8" stroke="#1F1F1F" stroke-width="2.4" stroke-linecap="round"/></svg></span>
         <div><div class="pill-name">Apollo.io</div><div class="pill-desc">Job title, LinkedIn, location</div></div>
       </div>
+      <!-- AI Agents -->
       <div class="crm-pill c-ochre">
-        <span class="pill-icon">🧠</span>
+        <span class="pill-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3C7.58 3 4 6.58 4 11c0 2.12.83 4.05 2.18 5.48A7.96 7.96 0 0012 19a7.96 7.96 0 005.82-2.52A7.96 7.96 0 0020 11c0-4.42-3.58-8-8-8z" fill="#2E1B88"/><circle cx="9" cy="10.5" r="1.2" fill="#9CE1FC"/><circle cx="15" cy="10.5" r="1.2" fill="#9CE1FC"/><path d="M9.5 14.5a3 3 0 005 0" stroke="#9CE1FC" stroke-width="1.2" stroke-linecap="round" fill="none"/><path d="M12 3V1M7 4L5.5 2.5M17 4l1.5-1.5" stroke="#2E1B88" stroke-width="1.2" stroke-linecap="round"/></svg></span>
         <div><div class="pill-name">AI Agents</div><div class="pill-desc">Company research &amp; briefs</div></div>
       </div>
     </div>
@@ -237,52 +232,59 @@
 
   <!-- ═══ ARROW: Enrichment → Notion ═══ -->
   <div class="crm-anim" style="animation-delay:650ms;display:flex;flex-direction:column;align-items:center;padding:12px 0;">
-    <div style="width:2px;height:28px;background:linear-gradient(to bottom,#E17A1444,#FFFFFF66);"></div>
-    <div style="width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:8px solid #FFFFFF66;"></div>
+    <div style="width:2px;height:28px;background:linear-gradient(to bottom,rgba(225,122,20,0.2),rgba(46,27,136,0.5));border-radius:1px;"></div>
+    <div style="width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:8px solid rgba(46,27,136,0.45);"></div>
   </div>
 
   <!-- ═══ STEP 3: NOTION HUB ═══ -->
   <div class="crm-anim" style="animation-delay:700ms;">
     <div class="crm-section-label">
-      <div class="crm-section-num" style="background:#FFFFFF;color:#0F0E17;">3</div>
+      <div class="crm-section-num" style="background:#2E1B88;">3</div>
       <div class="crm-section-text">Everything lands in one place</div>
     </div>
     <!-- Notion Hub card -->
-    <div style="background:linear-gradient(135deg,#1A1930,#232145);border:2px solid #FFFFFF33;border-radius:20px;padding:24px 28px;position:relative;box-shadow:0 0 60px #2E1B8822,inset 0 1px 0 #FFFFFF11;">
+    <div style="background:linear-gradient(135deg,rgba(156,225,252,0.06),rgba(46,27,136,0.04));border:1.5px solid rgba(46,27,136,0.12);border-radius:20px;padding:24px 28px;position:relative;">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-        <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#FFFFFF;background:#FFFFFF15;padding:4px 12px;border-radius:6px;">
+        <div style="display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#2E1B88;background:rgba(46,27,136,0.06);padding:4px 12px;border-radius:6px;">
+          <!-- Notion logo -->
+          <svg viewBox="0 0 20 20" width="14" height="14" fill="none"><path d="M3.5 2.5h9l4 4v11h-13z" fill="#FFFFFF" stroke="#1F1F1F" stroke-width="1.2"/><path d="M12.5 2.5v4h4" stroke="#1F1F1F" stroke-width="1.2" stroke-linejoin="round" fill="none"/><path d="M6.5 9h7M6.5 11.5h7M6.5 14h4" stroke="#1F1F1F" stroke-width="1" stroke-linecap="round" opacity=".45"/></svg>
           Notion CRM Hub
         </div>
-        <div style="font-size:11px;color:#8B8AA0;">
-          7 interconnected databases
-        </div>
+        <div style="font-size:11px;color:#999999;">7 interconnected databases</div>
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:8px;">
         <div class="crm-pill small c-white">
-          <span class="pill-icon">👤</span><div><div class="pill-name">Contacts</div></div>
+          <span class="pill-icon"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.5" stroke="#2E1B88" stroke-width="1.3" fill="none"/><path d="M3.5 17c0-3.5 2.9-5.5 6.5-5.5s6.5 2 6.5 5.5" stroke="#2E1B88" stroke-width="1.3" stroke-linecap="round" fill="none"/></svg></span>
+          <div><div class="pill-name">Contacts</div></div>
         </div>
         <div class="crm-pill small c-white">
-          <span class="pill-icon">🏢</span><div><div class="pill-name">Companies</div></div>
+          <span class="pill-icon"><svg viewBox="0 0 20 20" fill="none"><rect x="3" y="4" width="14" height="12" rx="2" stroke="#2E1B88" stroke-width="1.3" fill="none"/><path d="M3 8h14" stroke="#2E1B88" stroke-width="1.2"/><rect x="6" y="5" width="2" height="2" rx=".5" fill="#2E1B88" opacity=".3"/><rect x="12" y="5" width="2" height="2" rx=".5" fill="#2E1B88" opacity=".3"/></svg></span>
+          <div><div class="pill-name">Companies</div></div>
         </div>
         <div class="crm-pill small c-white">
-          <span class="pill-icon">📧</span><div><div class="pill-name">Emails</div></div>
+          <span class="pill-icon"><svg viewBox="0 0 20 20" fill="none"><rect x="2.5" y="4.5" width="15" height="11" rx="1.5" stroke="#2E1B88" stroke-width="1.3" fill="none"/><path d="M2.5 6.5L10 11.5l7.5-5" stroke="#2E1B88" stroke-width="1.2" fill="none"/></svg></span>
+          <div><div class="pill-name">Emails</div></div>
         </div>
         <div class="crm-pill small c-white">
-          <span class="pill-icon">📋</span><div><div class="pill-name">Meeting Notes</div></div>
+          <span class="pill-icon"><svg viewBox="0 0 20 20" fill="none"><rect x="3.5" y="2.5" width="13" height="15" rx="1.5" stroke="#2E1B88" stroke-width="1.3" fill="none"/><path d="M6.5 6.5h7M6.5 9.5h7M6.5 12.5h4" stroke="#2E1B88" stroke-width="1" stroke-linecap="round"/></svg></span>
+          <div><div class="pill-name">Meeting Notes</div></div>
         </div>
         <div class="crm-pill small c-white">
-          <span class="pill-icon">🤝</span><div><div class="pill-name">Deals</div></div>
+          <span class="pill-icon"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="#2E1B88" stroke-width="1.3" fill="none"/><path d="M6.5 10l2.5 2.5 5-5" stroke="#2E1B88" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span>
+          <div><div class="pill-name">Deals</div></div>
         </div>
         <div class="crm-pill small c-white">
-          <span class="pill-icon">📥</span><div><div class="pill-name">Leads</div></div>
+          <span class="pill-icon"><svg viewBox="0 0 20 20" fill="none"><path d="M10 3l2 4h4.5l-3.5 3 1.5 4.5L10 12l-4.5 2.5L7 10 3.5 7H8l2-4z" stroke="#2E1B88" stroke-width="1.3" stroke-linejoin="round" fill="none"/></svg></span>
+          <div><div class="pill-name">Leads</div></div>
         </div>
         <div class="crm-pill small c-white">
-          <span class="pill-icon">💰</span><div><div class="pill-name">Invoices</div></div>
+          <span class="pill-icon"><svg viewBox="0 0 20 20" fill="none"><rect x="3" y="3.5" width="14" height="13" rx="1.5" stroke="#2E1B88" stroke-width="1.3" fill="none"/><path d="M3 7.5h14" stroke="#2E1B88" stroke-width="1.2"/><text x="10" y="14" text-anchor="middle" font-family="DM Sans,sans-serif" font-weight="700" font-size="6" fill="#2E1B88">$</text></svg></span>
+          <div><div class="pill-name">Invoices</div></div>
         </div>
       </div>
-      <div style="margin-top:14px;padding:8px 14px;background:#2E1B8833;border-radius:10px;border:1px solid #2E1B8844;display:flex;align-items:center;gap:8px;">
-        <span style="font-size:14px;">🔗</span>
-        <span style="color:#9CE1FC;font-size:11px;font-weight:500;">
+      <div style="margin-top:14px;padding:8px 14px;background:rgba(46,27,136,0.04);border-radius:10px;border:1px solid rgba(46,27,136,0.08);display:flex;align-items:center;gap:8px;">
+        <svg viewBox="0 0 20 20" width="14" height="14" fill="none"><path d="M8 4h4M6 8h8M4 12h12M6 16h8" stroke="#2E1B88" stroke-width="1.2" stroke-linecap="round" opacity=".6"/></svg>
+        <span style="color:#4E1B61;font-size:11px;font-weight:500;">
           Notion native automations link contacts → companies → deals → meetings automatically
         </span>
       </div>
@@ -291,7 +293,7 @@
 
   <!-- ═══ ARROW: Notion → Deal Won ═══ -->
   <div class="crm-anim" style="animation-delay:850ms;display:flex;flex-direction:column;align-items:center;padding:12px 0;">
-    <div style="width:2px;height:28px;background:linear-gradient(to bottom,#FFFFFF33,#E17A14);"></div>
+    <div style="width:2px;height:28px;background:linear-gradient(to bottom,rgba(46,27,136,0.15),#E17A14);border-radius:1px;"></div>
     <div style="width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:8px solid #E17A14;"></div>
   </div>
 
@@ -305,46 +307,70 @@
     <!-- Deal Won header -->
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
       <span style="font-size:12px;font-weight:700;color:#E17A14;letter-spacing:0.04em;">🎉 DEAL WON</span>
-      <div style="flex:1;height:1px;background:linear-gradient(to right,#E17A1444,transparent);"></div>
-      <span style="font-size:11px;color:#8B8AA0;">6 things happen automatically</span>
+      <div style="flex:1;height:1px;background:linear-gradient(to right,rgba(225,122,20,0.3),transparent);"></div>
+      <span style="font-size:11px;color:#999999;">6 things happen automatically</span>
     </div>
 
     <!-- Deal Won grid -->
     <div id="deal-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+      <!-- Google Drive -->
       <div class="deal-pill" data-idx="0">
-        <span class="dp-icon">📁</span>
+        <span class="dp-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M8 4l4.5 8H21l-4.5-8H8z" fill="#FBBC04"/><path d="M3 20l4.5-8H16l-4.5 8H3z" fill="#4285F4"/><path d="M8 4L3 12.5l4.5 7.5h8.5L12 12H3.5" fill="#34A853" opacity=".9"/><path d="M8 4l4 8h9" stroke="none" fill="#EA4335" opacity=".15"/></svg></span>
         <div><div class="dp-name">Google Drive</div><div class="dp-desc">Folder structure</div></div>
       </div>
+      <!-- Linear -->
       <div class="deal-pill" data-idx="1">
-        <span class="dp-icon">📋</span>
+        <span class="dp-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3.68 12.49l7.83 7.83a9.53 9.53 0 01-7.83-7.83z" fill="#5E6AD2"/><path d="M3.01 10.64l10.35 10.35a9.56 9.56 0 003.86-1.78L4.79 6.78a9.56 9.56 0 00-1.78 3.86z" fill="#5E6AD2"/><path d="M5.97 5.57L18.43 18.03a9.53 9.53 0 002.06-2.77L8.74 3.51a9.53 9.53 0 00-2.77 2.06z" fill="#5E6AD2"/><path d="M10.22 3.15l10.63 10.63A9.55 9.55 0 0021.56 12 9.56 9.56 0 0012 2.44c-.6 0-1.2.06-1.78.18l0 .53z" fill="#5E6AD2"/></svg></span>
         <div><div class="dp-name">Linear</div><div class="dp-desc">Project &amp; team</div></div>
       </div>
+      <!-- Slack -->
       <div class="deal-pill" data-idx="2">
-        <span class="dp-icon">💬</span>
+        <span class="dp-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M6.5 14.5a1.5 1.5 0 110-3h3.5v3a1.5 1.5 0 01-3 0h-.5z" fill="#E01E5A"/><path d="M10 6.5a1.5 1.5 0 113 0V10H10a1.5 1.5 0 010-3v-.5z" fill="#36C5F0"/><path d="M17.5 10a1.5 1.5 0 110 3H14v-3.5a1.5 1.5 0 013 0v.5z" fill="#2EB67D"/><path d="M14 17.5a1.5 1.5 0 11-3 0V14h3.5a1.5 1.5 0 010 3H14z" fill="#ECB22E"/></svg></span>
         <div><div class="dp-name">Slack</div><div class="dp-desc">Client channel</div></div>
       </div>
+      <!-- Harvest -->
       <div class="deal-pill" data-idx="3">
-        <span class="dp-icon">⏱️</span>
+        <span class="dp-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="4.5" fill="#FA5D00"/><g fill="#FFFFFF"><rect x="5.5" y="6" width="2" height="12" rx=".8"/><rect x="8.5" y="8" width="2" height="10" rx=".8"/><rect x="11" y="10" width="2" height="8" rx=".8"/><rect x="13.5" y="6" width="2" height="12" rx=".8"/><rect x="16.5" y="8" width="2" height="10" rx=".8"/></g></svg></span>
         <div><div class="dp-name">Harvest</div><div class="dp-desc">Time tracking</div></div>
       </div>
+      <!-- MailerLite -->
       <div class="deal-pill" data-idx="4">
-        <span class="dp-icon">📬</span>
+        <span class="dp-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="4.5" fill="#FFFFFF" stroke="#E8E8E8" stroke-width=".5"/><path d="M4.5 7.5a2 2 0 012-2h11a2 2 0 012 2v6.5a2 2 0 01-2 2H11l-3.5 2.5v-2.5H6.5a2 2 0 01-2-2V7.5z" fill="#09C269"/><text x="12" y="13" text-anchor="middle" font-family="DM Sans,sans-serif" font-weight="800" font-size="6.5" fill="#FFFFFF">ML</text></svg></span>
         <div><div class="dp-name">MailerLite</div><div class="dp-desc">Mailing list</div></div>
       </div>
+      <!-- Zapier -->
       <div class="deal-pill" data-idx="5">
-        <span class="dp-icon">🤝</span>
+        <span class="dp-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9.5" fill="#FF4F00"/><path d="M14.5 6.5h-5l2 5h-4l6.5 7-1.5-5h4l-6.5-7z" fill="#FFFFFF" fill-rule="evenodd"/></svg></span>
         <div><div class="dp-name">Zapier Partner</div><div class="dp-desc">Deal registration</div></div>
       </div>
     </div>
   </div>
 
   <!-- ═══ FOOTER ═══ -->
-  <div class="crm-anim" style="animation-delay:1100ms;text-align:center;margin-top:48px;padding:24px 0;border-top:1px solid #5C5A7233;">
-    <div style="font-size:11px;color:#8B8AA0;letter-spacing:0.04em;line-height:1.7;">
+  <div class="crm-anim" style="animation-delay:1100ms;text-align:center;margin-top:48px;padding:24px 0;border-top:1px solid rgba(31,31,31,0.08);">
+    <div style="font-size:11px;color:#999999;letter-spacing:0.04em;line-height:1.7;">
       No seat-based pricing traps · No six-week onboarding · Just the system you need
     </div>
-    <div style="margin-top:12px;font-size:12px;color:#1479E1;font-weight:600;">
-      work.flowers
+    <div style="display:inline-flex;align-items:center;gap:8px;margin-top:14px;">
+      <!-- work.flowers official logo mark -->
+      <svg viewBox="3 3 85 85" width="28" height="28">
+        <path d="M86.7038,59.1642L81.8308,47.399c-0.4658-1.1247-0.4658-2.9651,0-4.0898l4.8734-11.7655c0.916-2.2114-0.1341-4.7467-2.3456-5.6627L72.593,21.0074c-1.1248-0.4659-2.4262-1.7674-2.8921-2.8922L64.8892,6.498c-0.3846-0.9285-1.0297-1.7501-1.9045-2.2448c-1.1962-0.6764-2.5833-0.7624-3.8199-0.2488L47.3992,8.878c-0.5352,0.2217-1.29,0.3325-2.0449,0.3325s-1.5098-0.1108-2.0449-0.3325L31.5437,4.0045C30.307,3.4909,28.92,3.5769,27.7237,4.2533c-0.8748,0.4946-1.5199,1.3163-1.9045,2.2448l-4.8117,11.6172c-0.4659,1.1248-1.7673,2.4263-2.8921,2.8922L6.3498,25.881c-2.2114,0.916-3.2616,3.4513-2.3456,5.6627l4.8734,11.7655c0.4659,1.1247,0.4659,2.9651,0,4.0898L4.0718,59.0019c-0.3863,0.9326-0.5144,1.9742-0.2463,2.9474c0.3656,1.3268,1.2869,2.366,2.5248,2.8785l11.7646,4.8735c1.1251,0.4661,2.427,1.768,2.893,2.8931l4.8154,11.6257c0.3844,0.928,1.0314,1.7476,1.9071,2.2398c1.1962,0.6723,2.5792,0.7568,3.8132,0.2443l11.7656-4.8735c0.5352-0.2217,1.29-0.3325,2.0449-0.3325s1.5098,0.1108,2.0449,0.3325l11.7656,4.8735c1.234,0.5125,2.617,0.428,3.8132-0.2443c0.8756-0.4922,1.5227-1.3118,1.9071-2.2398l4.8159-11.6267c0.4658-1.1246,1.767-2.4258,2.8916-2.8917l11.6055-4.8076c0.9325-0.3863,1.7591-1.0328,2.257-1.9108C87.1337,61.7865,87.2166,60.4009,86.7038,59.1642z" fill="#1D3799"/>
+        <path d="M79.0593,42.1612c-0.0828,0.1997-0.1555,0.411-0.2189,0.6311c-0.1785,0.6198-0.7235,1.0622-1.3685,1.0622l-13.1464,0c-0.5971,0-1.1789-0.1885-1.6625-0.5387l-4.3571-3.155c-0.6528-0.4727-0.7805-1.3938-0.2811-2.0263l0.4165-0.5275c0.4026-0.5099,0.9682-0.866,1.6021-1.0087l22.4458-5.0537c0.4483-0.1009,0.8242,0.3455,0.6484,0.77L79.0593,42.1612z" fill="#62D4F9"/>
+        <path d="M71.4451,23.7789l9.5739,3.9657c0.5112,0.2117,0.4473,0.9553-0.0924,1.0769l-17.3484,3.9057c-0.5211,0.1173-0.9005-0.4852-0.5694-0.9044l6.2042-7.8564c0.417-0.5281,1.1558-0.7252,1.752-0.4131C71.1252,23.6372,71.2855,23.7128,71.4451,23.7789z" fill="#62D4F9"/>
+        <path d="M66.9294,19.2638c0.1072,0.2587,0.2402,0.5191,0.3935,0.7781c0.2989,0.5051,0.2646,1.1413-0.0991,1.602l-4.7616,6.0302c-0.7068,0.895-2.144,0.304-2.0166-0.8293l1.8085-16.0902c0.0654-0.5821,0.863-0.6948,1.0872-0.1536L66.9294,19.2638z" fill="#62D4F9"/>
+        <path d="M48.5476,11.6495l8.8848-3.6805c0.997-0.413,2.0714,0.3953,1.9509,1.4678l-2.8402,25.2646c-0.0401,0.3569-0.1793,0.6954-0.4019,0.9773c-0.5753,0.7286-1.6841,0.7166-2.2435-0.0243l-3.4187-4.5281c-0.5733-0.7593-0.9463-1.6507-1.0845-2.5921l-2.4167-16.4529C47.5412,11.9872,48.0759,11.8448,48.5476,11.6495z" fill="#9BE0FD"/>
+        <path d="M43.9494,12.1092l1.4079,9.5835c0.128,0.871-0.9896,1.3386-1.5201,0.636L36.007,11.9569c-0.8702-1.1526,0.3393-2.7161,1.6736-2.1634l4.4803,1.856C42.6926,11.8697,43.3064,12.0177,43.9494,12.1092z" fill="#9BE0FD"/>
+        <path d="M26.8378,11.879c0.8388-2.0252,3.5605-2.3727,4.8812-0.6232l10.0604,13.3257c0.6744,0.8933-0.216,2.1198-1.2743,1.7552l-17.3266-5.9699c0.2383-0.366,0.4487-0.7363,0.6006-1.103L26.8378,11.879z" fill="#9BE0FD"/>
+        <path d="M6.7761,30.3961c-0.2821-0.6811,0.0413-1.4618,0.7224-1.7439l11.7649-4.8732c0.2293-0.0949,0.4599-0.2102,0.6898-0.3421c0.7016-0.4024,1.546-0.476,2.3107-0.2125l23.3562,8.0474c1.0661,0.3673,1.9984,1.0442,2.6778,1.9441l1.0434,1.382c1.3095,1.7344,0.2604,4.2366-1.8944,4.5187l-33.5016,4.3849c-0.9756,0.1277-1.9152-0.4163-2.2902-1.3259l-0.0059-0.0143L6.7761,30.3961z" fill="#017AE3"/>
+        <path d="M11.6492,48.547c0.0215-0.0517,0.0422-0.1043,0.0623-0.1576c0.3767-0.9986,1.2417-1.7326,2.2999-1.8711l31.6103-4.1374c1.3853-0.1813,2.1696,1.5392,1.1241,2.4659l-6.6023,5.8526c-0.3255,0.2886-0.7131,0.4983-1.1327,0.613L9.6531,59.34c-1.1367,0.3108-2.1342-0.8207-1.6833-1.9095L11.6492,48.547z" fill="#017AE3"/>
+        <path d="M19.2634,66.9298l-6.5106-2.6968c-1.2477-0.5168-1.1342-2.3204,0.1685-2.6766l15.7928-4.3185c1.4466-0.3956,2.4362,1.433,1.314,2.4277l-8.41,7.4547c-0.4603,0.408-1.1269,0.4597-1.6605,0.1537C19.7262,67.1415,19.494,67.0254,19.2634,66.9298z" fill="#017AE3"/>
+        <path d="M23.779,71.4449c-0.069-0.1664-0.1485-0.3336-0.2371-0.5008c-0.3159-0.5961-0.2196-1.3248,0.2852-1.7723l9.905-8.78c0.8767-0.7771,2.2124,0.1236,1.8207,1.2276l-6.0765,17.1261c-0.4342,1.2236-2.1483,1.268-2.6452,0.0684L23.779,71.4449z" fill="#017AE3"/>
+        <path d="M42.1609,79.0592l-8.3255,3.4489c-1.1342,0.4698-2.2887-0.6263-1.8782-1.7833l9.4652-26.678c0.1603-0.4517,0.4325-0.8555,0.7912-1.1734l6.841-6.0639c1.0388-0.9208,2.6449,0.046,2.3175,1.3949l-6.9652,28.6976c-0.2264,0.9327-0.9059,1.7069-1.8194,2.0013C42.4404,78.9505,42.2979,79.0025,42.1609,79.0592z" fill="#1099E7"/>
+        <path d="M81.365,56.8581l-11.6894-8.4643c-0.6678-0.4836-0.3257-1.5392,0.4987-1.5392h7.2979c0.6448,0,1.1898,0.4422,1.3684,1.0618c0.0634,0.2199,0.1361,0.4311,0.2186,0.6305l3.162,7.635C82.4401,56.7102,81.8281,57.1934,81.365,56.8581z" fill="#1099E7"/>
+        <path d="M62.0564,83.2101c-0.1353,0.3267-0.3926,0.582-0.7236,0.7192s-0.6934,0.1387-1.0205,0.0034l-11.7646-4.8735l-0.0134-0.0055c-0.8169-0.3369-1.266-1.2193-1.0576-2.078l7.4577-30.727c0.4753-1.9583,2.7848-2.8093,4.4171-1.6274l1.853,1.3417c0.2631,0.1905,0.4528,0.4656,0.5373,0.7793l6.2014,23.0171c-0.4229,0.5486-0.7798,1.1213-1.0137,1.6855L62.0564,83.2101z" fill="#1099E7"/>
+        <path d="M70.0037,65.8753l-3.9082-14.5047c-0.2085-0.7737,0.6709-1.3799,1.3199-0.91l15.113,10.9432c0.3592,0.2601,0.2942,0.8133-0.1155,0.983c0,0-7.2677,3.0418-10.4848,4.4235C71.135,67.1508,70.2282,66.7086,70.0037,65.8753z" fill="#1099E7"/>
+      </svg>
+      <span style="font-size:14px;font-weight:600;color:#1F1F1F;letter-spacing:-0.01em;">work.flowers</span>
     </div>
   </div>
 
@@ -356,15 +382,11 @@
   var active = -1;
   var total = 6;
   var pills = document.querySelectorAll('#deal-grid .deal-pill');
-
   setInterval(function() {
     active = active >= total - 1 ? -1 : active + 1;
     for (var i = 0; i < pills.length; i++) {
-      if (i <= active) {
-        pills[i].classList.add('lit');
-      } else {
-        pills[i].classList.remove('lit');
-      }
+      if (i <= active) { pills[i].classList.add('lit'); }
+      else { pills[i].classList.remove('lit'); }
     }
   }, 600);
 })();
