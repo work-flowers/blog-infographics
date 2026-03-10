@@ -1,0 +1,373 @@
+<div id="crm-root" style="background:#0F0E17;padding:40px 24px;font-family:'DM Sans','Helvetica Neue',sans-serif;color:#FFFFFF;position:relative;overflow:hidden;">
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+<style>
+  /* ── Reset scope ── */
+  #crm-root *, #crm-root *::before, #crm-root *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ── Fade-in-rise animation ── */
+  @keyframes fadeInRise {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .crm-anim {
+    opacity: 0;
+    animation: fadeInRise 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  /* ── Pill hover ── */
+  .crm-pill {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    background: #1A1930;
+    border: 1px solid #5C5A7244;
+    border-radius: 12px;
+    cursor: default;
+    transition: all 0.25s ease;
+  }
+  .crm-pill:hover {
+    background: #232145;
+    transform: scale(1.03);
+  }
+  .crm-pill.c-azure:hover  { border-color: rgba(20,121,225,0.27); box-shadow: 0 4px 20px rgba(20,121,225,0.13); }
+  .crm-pill.c-ochre:hover  { border-color: rgba(225,122,20,0.27); box-shadow: 0 4px 20px rgba(225,122,20,0.13); }
+  .crm-pill.c-white:hover  { border-color: rgba(255,255,255,0.27); box-shadow: 0 4px 20px rgba(255,255,255,0.13); }
+  .crm-pill.small {
+    gap: 8px;
+    padding: 6px 12px;
+  }
+  .crm-pill .pill-icon { font-size: 22px; flex-shrink: 0; }
+  .crm-pill.small .pill-icon { font-size: 18px; }
+  .crm-pill .pill-name {
+    color: #FFFFFF;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1.3;
+  }
+  .crm-pill.small .pill-name { font-size: 12px; }
+  .crm-pill .pill-desc {
+    color: #8B8AA0;
+    font-size: 11px;
+    line-height: 1.3;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* ── Deal cascade pill ── */
+  .deal-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: #1A1930;
+    border: 1px solid #5C5A7233;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+  }
+  .deal-pill.lit {
+    background: #E17A1418;
+    border-color: #E17A1466;
+    transform: scale(1.02);
+  }
+  .deal-pill .dp-icon { font-size: 16px; }
+  .deal-pill .dp-name {
+    color: #FFFFFF;
+    font-size: 11px;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+  .deal-pill.lit .dp-name { color: #F6C696; }
+  .deal-pill .dp-desc {
+    color: #8B8AA0;
+    font-size: 10px;
+    line-height: 1.2;
+  }
+
+  /* ── Section label ── */
+  .crm-section-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .crm-section-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .crm-section-text {
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  /* ── Stat badge ── */
+  .crm-stat-number {
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1;
+    font-family: 'DM Serif Display', Georgia, serif;
+  }
+  .crm-stat-label {
+    font-size: 10px;
+    color: #8B8AA0;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 4px;
+    font-weight: 600;
+  }
+</style>
+
+<!-- Background grid -->
+<div style="position:absolute;inset:0;background-image:radial-gradient(#5C5A7215 1px,transparent 1px);background-size:32px 32px;pointer-events:none;"></div>
+
+<!-- Glow accents -->
+<div style="position:absolute;top:-200px;right:-200px;width:500px;height:500px;background:radial-gradient(circle,#2E1B8818,transparent 70%);pointer-events:none;"></div>
+<div style="position:absolute;bottom:-150px;left:-150px;width:400px;height:400px;background:radial-gradient(circle,#E17A1410,transparent 70%);pointer-events:none;"></div>
+
+<div style="max-width:720px;margin:0 auto;position:relative;">
+
+  <!-- ═══ HEADER ═══ -->
+  <div class="crm-anim" style="animation-delay:0ms;text-align:center;margin-bottom:40px;">
+    <div style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#1479E1;font-weight:700;margin-bottom:12px;">
+      work.flowers · CRM Architecture
+    </div>
+    <h1 style="font-size:32px;font-weight:800;line-height:1.15;margin:0;font-family:'DM Serif Display',Georgia,serif;background:linear-gradient(135deg,#FFFFFF,#9CE1FC);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+      A CRM That Runs Itself
+    </h1>
+    <p style="color:#8B8AA0;font-size:14px;margin-top:12px;line-height:1.6;max-width:480px;margin-left:auto;margin-right:auto;">
+      7 databases. 30+ automations. Zero manual data entry.<br>
+      Here's how it all connects.
+    </p>
+
+    <!-- Stats row -->
+    <div style="display:flex;justify-content:center;gap:40px;margin-top:24px;padding:16px 0;border-top:1px solid #5C5A7233;border-bottom:1px solid #5C5A7233;">
+      <div style="text-align:center;">
+        <div class="crm-stat-number" style="color:#FFFFFF;">7</div>
+        <div class="crm-stat-label">Databases</div>
+      </div>
+      <div style="text-align:center;">
+        <div class="crm-stat-number" style="color:#1479E1;">30+</div>
+        <div class="crm-stat-label">Automations</div>
+      </div>
+      <div style="text-align:center;">
+        <div class="crm-stat-number" style="color:#E17A14;">12</div>
+        <div class="crm-stat-label">Integrations</div>
+      </div>
+      <div style="text-align:center;">
+        <div class="crm-stat-number" style="color:#9CE1FC;">0</div>
+        <div class="crm-stat-label">Manual Entry</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 1: DATA SOURCES ═══ -->
+  <div class="crm-anim" style="animation-delay:200ms;">
+    <div class="crm-section-label">
+      <div class="crm-section-num" style="background:#1479E1;">1</div>
+      <div class="crm-section-text">Data flows in from your existing tools</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-bottom:8px;">
+      <div class="crm-pill c-azure">
+        <span class="pill-icon">📧</span>
+        <div><div class="pill-name">Gmail</div><div class="pill-desc">cc crm@ on any thread</div></div>
+      </div>
+      <div class="crm-pill c-azure">
+        <span class="pill-icon">📅</span>
+        <div><div class="pill-name">Google Calendar</div><div class="pill-desc">Meetings auto-captured</div></div>
+      </div>
+      <div class="crm-pill c-azure">
+        <span class="pill-icon">🎙️</span>
+        <div><div class="pill-name">Granola</div><div class="pill-desc">In-person transcriptions</div></div>
+      </div>
+      <div class="crm-pill c-azure">
+        <span class="pill-icon">📬</span>
+        <div><div class="pill-name">MailerLite</div><div class="pill-desc">Mailing list activity</div></div>
+      </div>
+      <div class="crm-pill c-azure">
+        <span class="pill-icon">🌐</span>
+        <div><div class="pill-name">Website</div><div class="pill-desc">Inbound enquiries</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ARROW: Sources → Notion ═══ -->
+  <div class="crm-anim" style="animation-delay:400ms;display:flex;flex-direction:column;align-items:center;padding:12px 0;">
+    <div style="width:2px;height:32px;background:linear-gradient(to bottom,#1479E144,#1479E1);"></div>
+    <!-- Automation badge -->
+    <div style="display:inline-flex;align-items:center;gap:6px;padding:4px 12px;background:#2E1B8866;border:1px solid #2E1B88;border-radius:20px;color:#9CE1FC;font-size:11px;font-weight:600;letter-spacing:0.04em;">
+      <span style="font-size:13px;">⚡</span> 30+ Zapier Automations
+    </div>
+    <div style="width:2px;height:20px;background:linear-gradient(to bottom,#1479E1,#1479E144);"></div>
+    <div style="width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:8px solid #1479E188;"></div>
+  </div>
+
+  <!-- ═══ STEP 2: ENRICHMENT ═══ -->
+  <div class="crm-anim" style="animation-delay:500ms;">
+    <div class="crm-section-label">
+      <div class="crm-section-num" style="background:#E17A14;">2</div>
+      <div class="crm-section-text">AI enriches every record</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+      <div class="crm-pill c-ochre">
+        <span class="pill-icon">🔍</span>
+        <div><div class="pill-name">Apollo.io</div><div class="pill-desc">Job title, LinkedIn, location</div></div>
+      </div>
+      <div class="crm-pill c-ochre">
+        <span class="pill-icon">🧠</span>
+        <div><div class="pill-name">AI Agents</div><div class="pill-desc">Company research &amp; briefs</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ARROW: Enrichment → Notion ═══ -->
+  <div class="crm-anim" style="animation-delay:650ms;display:flex;flex-direction:column;align-items:center;padding:12px 0;">
+    <div style="width:2px;height:28px;background:linear-gradient(to bottom,#E17A1444,#FFFFFF66);"></div>
+    <div style="width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:8px solid #FFFFFF66;"></div>
+  </div>
+
+  <!-- ═══ STEP 3: NOTION HUB ═══ -->
+  <div class="crm-anim" style="animation-delay:700ms;">
+    <div class="crm-section-label">
+      <div class="crm-section-num" style="background:#FFFFFF;color:#0F0E17;">3</div>
+      <div class="crm-section-text">Everything lands in one place</div>
+    </div>
+    <!-- Notion Hub card -->
+    <div style="background:linear-gradient(135deg,#1A1930,#232145);border:2px solid #FFFFFF33;border-radius:20px;padding:24px 28px;position:relative;box-shadow:0 0 60px #2E1B8822,inset 0 1px 0 #FFFFFF11;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#FFFFFF;background:#FFFFFF15;padding:4px 12px;border-radius:6px;">
+          Notion CRM Hub
+        </div>
+        <div style="font-size:11px;color:#8B8AA0;">
+          7 interconnected databases
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        <div class="crm-pill small c-white">
+          <span class="pill-icon">👤</span><div><div class="pill-name">Contacts</div></div>
+        </div>
+        <div class="crm-pill small c-white">
+          <span class="pill-icon">🏢</span><div><div class="pill-name">Companies</div></div>
+        </div>
+        <div class="crm-pill small c-white">
+          <span class="pill-icon">📧</span><div><div class="pill-name">Emails</div></div>
+        </div>
+        <div class="crm-pill small c-white">
+          <span class="pill-icon">📋</span><div><div class="pill-name">Meeting Notes</div></div>
+        </div>
+        <div class="crm-pill small c-white">
+          <span class="pill-icon">🤝</span><div><div class="pill-name">Deals</div></div>
+        </div>
+        <div class="crm-pill small c-white">
+          <span class="pill-icon">📥</span><div><div class="pill-name">Leads</div></div>
+        </div>
+        <div class="crm-pill small c-white">
+          <span class="pill-icon">💰</span><div><div class="pill-name">Invoices</div></div>
+        </div>
+      </div>
+      <div style="margin-top:14px;padding:8px 14px;background:#2E1B8833;border-radius:10px;border:1px solid #2E1B8844;display:flex;align-items:center;gap:8px;">
+        <span style="font-size:14px;">🔗</span>
+        <span style="color:#9CE1FC;font-size:11px;font-weight:500;">
+          Notion native automations link contacts → companies → deals → meetings automatically
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ARROW: Notion → Deal Won ═══ -->
+  <div class="crm-anim" style="animation-delay:850ms;display:flex;flex-direction:column;align-items:center;padding:12px 0;">
+    <div style="width:2px;height:28px;background:linear-gradient(to bottom,#FFFFFF33,#E17A14);"></div>
+    <div style="width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:8px solid #E17A14;"></div>
+  </div>
+
+  <!-- ═══ STEP 4: DEAL WON CASCADE ═══ -->
+  <div class="crm-anim" style="animation-delay:900ms;">
+    <div class="crm-section-label">
+      <div class="crm-section-num" style="background:#E17A14;">4</div>
+      <div class="crm-section-text">Deal won? Everything spins up</div>
+    </div>
+
+    <!-- Deal Won header -->
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+      <span style="font-size:12px;font-weight:700;color:#E17A14;letter-spacing:0.04em;">🎉 DEAL WON</span>
+      <div style="flex:1;height:1px;background:linear-gradient(to right,#E17A1444,transparent);"></div>
+      <span style="font-size:11px;color:#8B8AA0;">6 things happen automatically</span>
+    </div>
+
+    <!-- Deal Won grid -->
+    <div id="deal-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+      <div class="deal-pill" data-idx="0">
+        <span class="dp-icon">📁</span>
+        <div><div class="dp-name">Google Drive</div><div class="dp-desc">Folder structure</div></div>
+      </div>
+      <div class="deal-pill" data-idx="1">
+        <span class="dp-icon">📋</span>
+        <div><div class="dp-name">Linear</div><div class="dp-desc">Project &amp; team</div></div>
+      </div>
+      <div class="deal-pill" data-idx="2">
+        <span class="dp-icon">💬</span>
+        <div><div class="dp-name">Slack</div><div class="dp-desc">Client channel</div></div>
+      </div>
+      <div class="deal-pill" data-idx="3">
+        <span class="dp-icon">⏱️</span>
+        <div><div class="dp-name">Harvest</div><div class="dp-desc">Time tracking</div></div>
+      </div>
+      <div class="deal-pill" data-idx="4">
+        <span class="dp-icon">📬</span>
+        <div><div class="dp-name">MailerLite</div><div class="dp-desc">Mailing list</div></div>
+      </div>
+      <div class="deal-pill" data-idx="5">
+        <span class="dp-icon">🤝</span>
+        <div><div class="dp-name">Zapier Partner</div><div class="dp-desc">Deal registration</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <div class="crm-anim" style="animation-delay:1100ms;text-align:center;margin-top:48px;padding:24px 0;border-top:1px solid #5C5A7233;">
+    <div style="font-size:11px;color:#8B8AA0;letter-spacing:0.04em;line-height:1.7;">
+      No seat-based pricing traps · No six-week onboarding · Just the system you need
+    </div>
+    <div style="margin-top:12px;font-size:12px;color:#1479E1;font-weight:600;">
+      work.flowers
+    </div>
+  </div>
+
+</div><!-- /max-width wrapper -->
+
+<!-- ═══ Deal Won Cascade Animation ═══ -->
+<script>
+(function() {
+  var active = -1;
+  var total = 6;
+  var pills = document.querySelectorAll('#deal-grid .deal-pill');
+
+  setInterval(function() {
+    active = active >= total - 1 ? -1 : active + 1;
+    for (var i = 0; i < pills.length; i++) {
+      if (i <= active) {
+        pills[i].classList.add('lit');
+      } else {
+        pills[i].classList.remove('lit');
+      }
+    }
+  }, 600);
+})();
+</script>
+
+</div><!-- /crm-root -->
